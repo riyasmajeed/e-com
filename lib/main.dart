@@ -1,4 +1,8 @@
+import 'package:comm/view/bannersileder.dart';
 import 'package:comm/view/home.dart';
+import 'package:comm/view/loginpage.dart';
+import 'package:comm/view/mainhomepage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: Mainhomepage(),
     );
   }
 }

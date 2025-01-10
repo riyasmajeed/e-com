@@ -3,10 +3,10 @@ import 'package:comm/model/model.dart';
 import 'package:get/get.dart';
 
 
+
 class ProductController extends GetxController {
   var isLoading = true.obs;
   var products = <Product>[].obs;
-  var error = ''.obs;
 
   @override
   void onInit() {
@@ -20,7 +20,8 @@ class ProductController extends GetxController {
       var productData = await ApiService().fetchProducts();
       products.assignAll(productData);
     } catch (e) {
-      error("Failed to fetch products");
+      // Handle the error
+      print("Error fetching products: $e");
     } finally {
       isLoading(false);
     }
