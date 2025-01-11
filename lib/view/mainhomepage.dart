@@ -1,5 +1,8 @@
 import 'package:comm/view/firsthome.dart';
 import 'package:comm/view/home.dart';
+import 'package:comm/view/productsearch.dart';
+import 'package:comm/view/profilpage.dart';
+import 'package:comm/view/wishlistpage.dart';
 import 'package:flutter/material.dart';
 
 class Mainhomepage extends StatefulWidget {
@@ -13,10 +16,12 @@ class _MainhomepageState extends State<Mainhomepage> {
   int currentTab = 0; // This keeps track of the selected tab
   List<Widget> screens = [
    HomePage(),
-    Scaffold(body: Center(child: Text('Screen 2'))),
-    firstHomeScreen(), // Assuming this is a defined screen
+   ProductSearchPage(),
+    ProfileScreen(), // Assuming this is a defined screen
     // CartScreen(), // Add this screen when it's available
-    Scaffold(body: Center(child: Text('Screen 5'))),
+    // Scaffold(body: Center(child: Text('Screen 5'))),
+     WishlistPage(),
+      Scaffold(body: Center(child: Text('Screen 5'))),
   ];
 
   // Function to handle tab changes

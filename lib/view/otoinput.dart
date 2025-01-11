@@ -1,4 +1,5 @@
 import 'package:comm/model/colors.dart';
+import 'package:comm/view/mainhomepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:comm/view/home.dart';
@@ -32,7 +33,7 @@ class _OtpInputScreenState extends State<OtpInputScreen> {
       // Successfully verified OTP, navigate to the next screen
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => Mainhomepage()),
       );
     } else {
       _showErrorDialog('OTP Error', 'Incorrect OTP. Please try again.');

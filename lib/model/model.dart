@@ -58,16 +58,17 @@
 class Product {
   final int id;
   final List<String> images;
-  final bool inWishlist;
+  bool inWishlist;
   final double avgRating;
   final double salePrice;
   final List<Addon> addons;
   final String name;
+  
 
   Product({
     required this.id,
     required this.images,
-    required this.inWishlist,
+    this.inWishlist = false,
     required this.avgRating,
     required this.salePrice,
     required this.addons,

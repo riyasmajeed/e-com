@@ -91,3 +91,33 @@ class BannerController {
 
 }
 
+class Productsearch extends GetxController {
+  var products = <Product>[].obs;
+  var isLoading = false.obs;
+  var noProductsMessage = "No products found.".obs;
+
+  // Function to search products based on a query
+  Future<void> searchProducts(String query) async {
+    isLoading.value = true;
+    final response = await http.post(
+      Uri.parse('https://admin.kushinirestaurant.com/api/search/'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'query': query}),
+    );
+
+    if (response.statusCode == 200) {
+      final responseBody = jsonDecode(response.body);
+
+      if (responseBody is List) {
+        products.value = List<Product>.from(responseBody.map((item) => Product.fromJson(item)));
+        noProductsMessage.value = "No products found.";
+      } else if (responseBody['message'] != null) {
+        products.clear();
+        noProductsMessage.value = responseBody['message'];
+      }
+    } else {
+      noProductsMessage.value = "Failed to load products";
+    }
+    isLoading.value = false;
+  }
+}

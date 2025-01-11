@@ -2,6 +2,7 @@
 
 import 'package:comm/controll/product.dart';
 import 'package:comm/view/bannersileder.dart';
+import 'package:comm/view/productdetails.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,10 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final ProductController productController = Get.put(ProductController());
 @override
-  void initState() {
-    ProductCarouselScreen();
-    super.initState();
-  }
+  
   @override
 
   
@@ -54,8 +52,8 @@ class _HomePageState extends State<HomePage> {
           
                   return GestureDetector(
                     onTap: () {
-                      // Navigate to Product Details Page (if available)
-                      // Get.to(() => ProductDetailsPage(product: product));
+                      
+                      Get.to(() => ProductDetailsPage(product: product));
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -85,7 +83,22 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                 ),
-                                const Icon(Icons.favorite, color: Colors.grey, size: 22),
+                                // IconButton(onPressed: () {
+                                  
+                                // }, icon: Icon(Icons.favorite, color: Colors.grey, size: 22) )
+                               IconButton(
+                        onPressed: () {
+                          productController.toggleWishlist(product.id);
+                        },
+                        icon: Icon(
+                          product.inWishlist
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color:
+                              product.inWishlist ? Colors.red : Colors.grey,
+                        ),
+                      ),
+
                               ],
                             ),
                           ),

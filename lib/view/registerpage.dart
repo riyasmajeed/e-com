@@ -1,11 +1,8 @@
-
-
-
-import 'dart:convert';
+import 'package:comm/controll/registerapi.dart';
 import 'package:comm/view/loginpage.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:comm/view/home.dart';
+import 'home.dart';
+
 
 class Registerpage extends StatefulWidget {
   const Registerpage({super.key});
@@ -47,7 +44,7 @@ class _RegisterpageState extends State<Registerpage> {
     );
   }
 
-  // Handle API registration
+  // Handle registration
   void _register() async {
     String firstName = _nameController.text.trim();
     String phoneNumber = _phonenumberController.text.trim();
@@ -57,52 +54,29 @@ class _RegisterpageState extends State<Registerpage> {
         _isLoading = true;
       });
 
-      final url = Uri.parse('https://admin.kushinirestaurant.com/api/login-register/');
-      try {
-        final response = await http.post(
-          url,
-          headers: {'Content-Type': 'application/json'},
-          body: json.encode({
-            'first_name': firstName,
-            'phone_number': phoneNumber,
-          }),
+      // Use the separate API function to register the user
+      final result = await registerUser(firstName, phoneNumber);
+
+      setState(() {
+        _isLoading = false;
+      });
+
+      if (result['success']) {
+        // Registration successful
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Registration Successful')),
         );
-
-        setState(() {
-          _isLoading = false;
-        });
-
-        if (response.statusCode == 200) {
-          final responseData = json.decode(response.body);
-         print(responseData);
-
-          // Show success message using SnackBar
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Registration Successful'),
-              duration: Duration(seconds: 2), // Set how long the message will be displayed
-            ),
+        
+        // Navigate to Home screen after showing the message
+        Future.delayed(Duration(seconds: 2), () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Home()),
           );
-
-          // Navigate to Home screen after showing the message
-          Future.delayed(Duration(seconds: 2), () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Home(),
-              ),
-            );
-          });
-        } else {
-          // Handle server-side error
-          _showErrorDialog(context, 'Registration Failed', 'Something went wrong. Please try again.');
-        }
-      } catch (error) {
-        setState(() {
-          _isLoading = false;
         });
-        // Handle network error
-        _showErrorDialog(context, 'Network Error', 'Could not reach the server. Please check your connection.');
+      } else {
+        // Handle failure
+        _showErrorDialog(context, 'Registration Failed', result['message']);
       }
     } else {
       _showErrorDialog(context, 'Input Error', 'All fields are required.');
@@ -225,4 +199,3 @@ class _RegisterpageState extends State<Registerpage> {
     );
   }
 }
-
