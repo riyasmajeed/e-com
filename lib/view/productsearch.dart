@@ -45,7 +45,8 @@ class ProductSearchPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final product = productController.products[index];
                     return ListTile(
-                      title: Text(product.name),
+                       leading: Image.network(   product.images.isNotEmpty ? product.images[0] : '', height: 50, width: 50, fit: BoxFit.cover),
+                      title: Text(product.name,style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
                       subtitle: Text('Price: \$${product.salePrice}'),
                     );
                   },

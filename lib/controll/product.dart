@@ -79,7 +79,9 @@ class ProductController extends GetxController {
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      Get.snackbar("Success", data["message"]);
+      
+     Get.snackbar("Success", data["message"] ?? "Wishlist updated.");
+
 
       // Update the local product's `inWishlist` status
       final productIndex =
@@ -90,7 +92,7 @@ class ProductController extends GetxController {
         products.refresh(); // Notify listeners to rebuild UI
       }
     } else {
-      Get.snackbar("Error", "Failed to update wishlist.");
+      Get.snackbar("Error", "Please try again");
     }
   } catch (e) {
     Get.snackbar("Error", e.toString());

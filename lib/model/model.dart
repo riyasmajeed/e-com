@@ -135,17 +135,3 @@ class Addon {
 }
 
 
-class Banner {
-  // Assuming a simple Banner class with required fields
-  final String imageUrl;
-  final String link;
-
-  Banner({required this.imageUrl, required this.link});
-
-  factory Banner.fromJson(Map<String, dynamic> json) {
-    return Banner(
-      imageUrl: json['imageUrl'] ?? '',
-      link: json['link'] ?? '',
-    );
-  }
-}

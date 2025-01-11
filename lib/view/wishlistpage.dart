@@ -21,7 +21,7 @@ class WishlistPage extends StatelessWidget {
                 final product = wishlistItems[index];
                 return ListTile(
                   leading: Image.network(   product.images.isNotEmpty ? product.images[0] : '', height: 50, width: 50, fit: BoxFit.cover),
-                  title: Text(product.name),
+                  title: Text(product.name ,style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
                   subtitle: Text("\$${product.salePrice}"),
                   trailing: IconButton(
                     icon: const Icon(Icons.remove_circle, color: Colors.red),

@@ -1,3 +1,4 @@
+import 'package:comm/view/bannersileder.dart';
 import 'package:comm/view/firsthome.dart';
 import 'package:comm/view/home.dart';
 import 'package:comm/view/productsearch.dart';
@@ -21,7 +22,8 @@ class _MainhomepageState extends State<Mainhomepage> {
     // CartScreen(), // Add this screen when it's available
     // Scaffold(body: Center(child: Text('Screen 5'))),
      WishlistPage(),
-      Scaffold(body: Center(child: Text('Screen 5'))),
+     Scaffold(body: Center(child: Text('Screen 5'))),
+      // BannerSlider(),
   ];
 
   // Function to handle tab changes
